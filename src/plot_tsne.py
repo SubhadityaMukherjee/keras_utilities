@@ -4,6 +4,7 @@ import os
 from sklearn.manifold import TSNE
 from yellowbrick.text import TSNEVisualizer
 
+
 def plot_tsne(ds, save=False, dir="images/"):
     """Generates a t-SNE plot of the dataset.
 
@@ -16,8 +17,9 @@ def plot_tsne(ds, save=False, dir="images/"):
     images = images.reshape(images.shape[0], -1)
 
     # Apply t-SNE
-    tsne_ds = TSNE(n_components=2, random_state=42,
-                   init='random', n_jobs=-1).fit_transform(images)
+    tsne_ds = TSNE(
+        n_components=2, random_state=42, init="random", n_jobs=-1
+    ).fit_transform(images)
 
     # Normalize the data
     tsne_ds = (tsne_ds - tsne_ds.min()) / (tsne_ds.max() - tsne_ds.min())
@@ -42,7 +44,13 @@ def plot_tsne(ds, save=False, dir="images/"):
 
     plt.show()
 
-    def plot_tsne_other(ds, column="image", save=True, save_dir="images/", file_name="tsne_projection.pdf"):
+    def plot_tsne_other(
+        ds,
+        column="image",
+        save=True,
+        save_dir="images/",
+        file_name="tsne_projection.pdf",
+    ):
         """Other t-SNE plot, with legend of classes.
 
         Args:
@@ -57,7 +65,7 @@ def plot_tsne(ds, save=False, dir="images/"):
 
         # Apply t-SNE
         tsne = TSNEVisualizer()
-        tsne.fit(images, ds["class_name"],  show=False)
+        tsne.fit(images, ds["class_name"], show=False)
         tsne.set_title("t-SNE projection of images")
 
         tsne.finalize()

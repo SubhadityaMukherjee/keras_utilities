@@ -4,6 +4,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.layers import TextVectorization
 
+
 class TokenAndPositionEmbedding(layers.Layer):
     def __init__(self, maxlen, vocab_size, embed_dim):
         super(TokenAndPositionEmbedding, self).__init__()

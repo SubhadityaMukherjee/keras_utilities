@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
+
 def plot_latent_space(vae, n=30, figsize=15):
     # display a n*n 2D manifold of digits
     digit_size = 28

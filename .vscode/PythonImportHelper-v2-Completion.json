@@ -1,0 +1,90 @@
+[
+    {
+        "label": "tensorflow",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tensorflow",
+        "description": "tensorflow",
+        "detail": "tensorflow",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "tqdm",
+        "importPath": "tqdm",
+        "description": "tqdm",
+        "isExtraImport": true,
+        "detail": "tqdm",
+        "documentation": {}
+    },
+    {
+        "label": "CTCLayer",
+        "kind": 6,
+        "importPath": "src.ctc_layer",
+        "description": "src.ctc_layer",
+        "peekOfCode": "class CTCLayer(keras.layers.Layer):\n    def __init__(self, name=None):\n        super().__init__(name=name)\n        self.loss_fn = keras.backend.ctc_batch_cost\n    def call(self, y_true, y_pred):\n        batch_len = tf.cast(tf.shape(y_true)[0], dtype=\"int64\")\n        input_length = tf.cast(tf.shape(y_pred)[1], dtype=\"int64\")\n        label_length = tf.cast(tf.shape(y_true)[1], dtype=\"int64\")\n        input_length = input_length * \\\n            tf.ones(shape=(batch_len, 1), dtype=\"int64\")",
+        "detail": "src.ctc_layer",
+        "documentation": {}
+    },
+    {
+        "label": "distortion_free_resize",
+        "kind": 2,
+        "importPath": "src.distortion_free_resize",
+        "description": "src.distortion_free_resize",
+        "peekOfCode": "def distortion_free_resize(image, img_size):\n    w, h = img_size\n    image = tf.image.resize(image, size=(h, w), preserve_aspect_ratio=True)\n    # Check tha amount of padding needed to be done.\n    pad_height = h - tf.shape(image)[0]\n    pad_width = w - tf.shape(image)[1]\n    # Only necessary if you want to do same amount of padding on both sides.\n    if pad_height % 2 != 0:\n        height = pad_height // 2\n        pad_height_top = height + 1",
+        "detail": "src.distortion_free_resize",
+        "documentation": {}
+    },
+    {
+        "label": "load_images_to_array",
+        "kind": 2,
+        "importPath": "src.load_images_and_labels_to_numpy",
+        "description": "src.load_images_and_labels_to_numpy",
+        "peekOfCode": "def load_images_to_array(dss_path):\n    \"\"\"\n    Return images and labels as numpy arrays\n    \"\"\"\n    images, labels = [], []\n    for root, dirs, files in tqdm(os.walk(dss_path)):\n        for file in files:\n            if file.endswith(\".pgm\"):\n                fname = os.path.join(root, file)\n                images.append(np.array(Image.open(fname).convert(\"L\").resize(",
+        "detail": "src.load_images_and_labels_to_numpy",
+        "documentation": {}
+    },
+    {
+        "label": "label_to_dict",
+        "kind": 2,
+        "importPath": "src.load_images_and_labels_to_numpy",
+        "description": "src.load_images_and_labels_to_numpy",
+        "peekOfCode": "def label_to_dict(labels):\n    labelmap = {label: i for i, label in enumerate(np.unique(labels))}\n    return labelmap, [labelmap[label] for label in labels]",
+        "detail": "src.load_images_and_labels_to_numpy",
+        "documentation": {}
+    },
+    {
+        "label": "vocabulary_size",
+        "kind": 2,
+        "importPath": "src.vocabulary_size",
+        "description": "src.vocabulary_size",
+        "peekOfCode": "def vocabulary_size(y_train):\n    \"\"\"\n    Find maximum length and the size of the vocabulary in the training data.\n    \"\"\"\n    train_labels_cleaned = []\n    characters = set()\n    max_len = 0\n    for label in y_train:\n        for char in label:\n            characters.add(char)",
+        "detail": "src.vocabulary_size",
+        "documentation": {}
+    }
+]

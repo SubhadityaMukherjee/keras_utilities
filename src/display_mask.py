@@ -3,6 +3,7 @@ import numpy as np
 from tensorflow import keras
 from IPython.display import Image, display
 
+
 def display_mask(val_preds, i, fname=None):
     """Quick utility to display a model's prediction. It takes an image and generates a mask from it."""
     mask = np.argmax(val_preds[i], axis=-1)

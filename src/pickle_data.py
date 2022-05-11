@@ -1,4 +1,6 @@
 import pickle
+
+
 def save_to_pickle(data, filename):
     # save the data to a file
     with open(filename, "wb") as f:

@@ -1,4 +1,6 @@
 import tensorflow as tf
+
+
 def distortion_free_resize(image, img_size):
     w, h = img_size
     image = tf.image.resize(image, size=(h, w), preserve_aspect_ratio=True)

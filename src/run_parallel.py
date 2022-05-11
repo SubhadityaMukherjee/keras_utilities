@@ -6,11 +6,13 @@ from pathlib import Path
 import concurrent
 from tqdm import tqdm
 
+
 def ifnone(a, b):
     """
     Return if None
     """
     return b if a is None else a
+
 
 def listify(o):
     """
